@@ -24,6 +24,15 @@ const pdSchema = new Schema({
         type: SchemaTypes.ObjectId,
         required: [true, 'Categoria requerida'],
         ref: 'Categoria'
+    },
+    description: {
+        type: String,
+        required: [true, 'Descripcion de producto requerida']
+    },
+    disponible: {
+        type: Boolean,
+        required: true,
+        default: true
     }
 });
 

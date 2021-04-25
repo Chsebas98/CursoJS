@@ -16,6 +16,12 @@ const userSchema = new Schema({
     estado: {
         type: Boolean,
         default: true
+    },
+    rol: {
+        type: String,
+        required: true,
+        default: 'USER_ROL',
+        enum: ['ADMIN-ROL', 'USER_ROL']
     }
 })
 

@@ -35,6 +35,8 @@ class Server {
     routes() {
         this.app.use('/usuarios', require('../routes/user'));
         this.app.use('/auth', require('../routes/auth'));
+        this.app.use('/productos', require('../routes/producto'));
+        this.app.use('/categorias', require('../routes/categoria'));
     }
 
     //Puerto de escucha

@@ -4,6 +4,7 @@ const catSchema = new Schema({
     nombre: {
         type: String,
         required: [true, 'Nombre requerido'],
+        unique: true
     },
     estado: {
         type: Boolean,
@@ -11,7 +12,7 @@ const catSchema = new Schema({
     },
     usuario: {
         type: SchemaTypes.ObjectId,
-        ref: 'Usuario',
+        ref: 'User',
         required: true
     }
 })

@@ -1,6 +1,5 @@
 # Final-Api
-## Curso de Javascript
-## Instalacion
+## Curso de Javascript/Instalación
 
 Al clonar el código ejecutar el siguiente comando para instalar todos los modulos de node
 
