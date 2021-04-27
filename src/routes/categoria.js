@@ -10,11 +10,10 @@ router.get('/:id', validToken, catget);
 
 router.get('/buscar/:id', validToken, catgetId); //categoria por Id
 
-router.post('/:id', /* validRol, [check('correo', 'El correo no es valido verifique el campo').isEmail()], */
-    catpost);
+router.post('/:id', [validToken], catpost);
 
-router.put('/:id', catput);
+router.put('/:id', validToken, catput);
 
-router.delete('/:id', catdelete);
+router.delete('/:id', validToken, catdelete);
 
 module.exports = router;

@@ -50,19 +50,25 @@ const catpost = async(req = request, res = response) => {
         cats
 
     })
-
-
 }
 
-const catput = (req = request, res = response) => {
+const catput = async(req = request, res = response) => {
+    const id = req.params.id;
+    let { nombre } = req.body;
+    const cats = await Cat.findByIdAndUpdate(id, { nombre });
     res.json({
-        msg: 'Cat-Put'
+        msg: 'Cat-Put',
+        id,
+        cats
     })
 }
 
-const catdelete = (req = request, res = response) => {
+const catdelete = async(req = request, res = response) => {
+    const id = req.params.id;
+    const cats = await Cat.findByIdAndUpdate(id, { estado: false });
     res.json({
-        msg: 'Cat-Delete'
+        msg: 'Cat-Delete',
+        cats
     })
 }
 
