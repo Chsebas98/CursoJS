@@ -63,7 +63,7 @@ let userput = async(req = request, res = response) => {
 
 let userdelete = async(req = request, res = response) => {
     const id = req.params.id;
-    const user = await User.findByIdAndUpdate(id, { estado: false });
+    const user = await User.findOneAndUpdate(id, { estado: false });
     res.json({
         msg: 'Api- Delete',
         user

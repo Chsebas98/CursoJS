@@ -6,11 +6,11 @@ const { catget, catgetId, catpost, catput, catdelete } = require('../controllers
 
 
 //Rutas
-router.get('/', /* validToken, */ catget);
+router.get('/:id', validToken, catget);
 
-router.get('/:id', /* validToken, */ catgetId);
+router.get('/buscar/:id', validToken, catgetId); //categoria por Id
 
-router.post('/', /* validRol, [check('correo', 'El correo no es valido verifique el campo').isEmail()], */
+router.post('/:id', /* validRol, [check('correo', 'El correo no es valido verifique el campo').isEmail()], */
     catpost);
 
 router.put('/:id', catput);
