@@ -2,6 +2,7 @@ const { response, request } = require('express');
 const Produ = require('../models/producto');
 const Cat = require('../models/categoria');
 const { validationResult } = require('express-validator');
+const User = require('../models/user');
 
 const pdget = async(req = request, res = response) => {
     const id = req.params.id;
@@ -29,11 +30,17 @@ const pdpost = async(req = request, res = response) => {
             errors
         });
     }
-    //Recibo id de usuario
+    //Recibo id de usuario ADMIN O CLIENTE
     const id = req.params.id;
-    /*
-    Validar q sea Admin
-    */
+
+    //Validar q sea Admin
+    const user = await User.findById(id);
+    if (user.rol == "ADMIN_ROL") {
+        res.status(200).json({
+            msg: 'ADMIN',
+        })
+    }
+
     const usuario = id;
     //Lo que recibo del body
     const { nombre, precio, description, categoria, disponible } = req.body;
@@ -60,6 +67,7 @@ const pdpost = async(req = request, res = response) => {
         msg: 'Producto-Post',
         categoria,
         prodexist,
+        user,
         prod
     })
 }
