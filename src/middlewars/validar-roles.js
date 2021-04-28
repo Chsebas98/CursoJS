@@ -2,46 +2,35 @@ const { request, response } = require('express');
 const User = require('../models/user');
 const { validationResult } = require('express-validator');
 
-//valido si es un rol existente
-async function validUs(id) {
-
-    let vid = await User.findOne({ rol });
-    let resp = false;
-
-    if (!vid) {
-        /*         resp = true; */
-    }
-
-    if (vid !== 'USER_ROL' || 'ADMIN_ROL') {
-        resp = true
-    }
-    /*     console.log(vid); */
-    return resp;
-}
-//Valido si es Administrador
-const validAdRol = async(req = request, res = response, next) => {
-    const id = req.params.id;
-    let resp = await validUs(id);
-    console.log(resp);
-    if (resp == true) {
+const validUser = async(req = request, res = response) => {
+    const id = req.header('id');
+    const user = await User.findById(id);
+    if (!user) {
         return res.status(400).json({
-            msg: 'Usuario inválido'
+            msg: 'No existe el usuario'
         })
     }
-    const usuario = await User.findById(id);
-    /* console.log(usuario); */
-    if (usuario.rol === 'ADMNI_ROL') {
-        next()
+    try {
+        /* const user = await User.findById(id); */
+        if (user.rol == "ADMIN_ROL") {
+            return res.status(200).json({
+                msg: 'ADMIN',
+                user
+            })
+        }
+        res.status(200).json({
+            msg: 'CLIENTE',
+            user
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({
+            msg: 'Usuario incorrecto (tipo)'
+        })
     }
-}
 
-//Valido si es Usuario
-const validUsRol = (req = request, res = response, next) => {
-    const id = req.params.id;
-    validUs(id);
 }
 
 module.exports = {
-    validAdRol,
-    validUsRol
+    validUser
 };
