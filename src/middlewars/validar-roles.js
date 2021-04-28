@@ -30,7 +30,39 @@ const validUser = async(req = request, res = response) => {
     }
 
 }
+const existeRol = async(req = request, res = response) => {
+    const { correo } = req.body;
+
+    const user = await User.findOne({ correo });
+    if (!user) {
+        return res.status(400).json({
+            msg: 'No existe el usuario'
+        })
+    }
+    try {
+        /* const user = await User.findById(id); */
+        if (user.rol == "ADMIN_ROL") {
+            return res.status(200).json({
+                msg: 'ADMIN',
+                user
+            })
+        }
+        if (user.rol == "USER_ROL") {
+            res.status(200).json({
+                msg: 'CLIENTE',
+                user
+            })
+        }
+
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({
+            msg: 'Usuario incorrecto (tipo)'
+        })
+    }
+}
 
 module.exports = {
-    validUser
+    validUser,
+    existeRol
 };
