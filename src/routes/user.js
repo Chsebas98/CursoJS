@@ -4,16 +4,17 @@ const router = Router();
 //Import controllers
 const { userget, userpost, userput, userdelete } = require('../controllers/user');
 const { validToken } = require('../middlewars/validar-jwt');
+const { validAdRol } = require('../middlewars/validar-roles');
 
 //Rutas
 router.get('/', validToken, userget);
 
-router.post('/', /* validRol, */ [check('correo', 'El correo no es valido verifique el campo').isEmail()],
+router.post('/', [check('correo', 'El correo no es valido verifique el campo').isEmail()],
     userpost);
 
-router.put('/:id', userput);
+router.put('/:id', [validToken], userput);
 
-router.delete('/:id', userdelete);
+router.delete('/:id:rol', [validToken, validAdRol], userdelete);
 
 
 

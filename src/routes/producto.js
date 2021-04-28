@@ -5,15 +5,15 @@ const { validToken } = require('../middlewars/validar-jwt');
 const { pdget, pdgetId, pdpost, pdput, pddelete } = require('../controllers/producto')
 
 //Rutas
-router.get('/', /* validToken, */ pdget);
+router.get('/:id', validToken, pdget);
 
-router.get('/:id', /* validToken, */ pdgetId);
+router.get('/buscar/:id', validToken, pdgetId);
 
-router.post('/', /* validRol, [check('correo', 'El correo no es valido verifique el campo').isEmail()], */
+router.post('/:id', validToken, /* validRol, [check('correo', 'El correo no es valido verifique el campo').isEmail()], */
     pdpost);
 
-router.put('/:id', pdput);
+router.put('/:id', validToken, pdput);
 
-router.delete('/:id', pddelete);
+router.delete('/:id', validToken, pddelete);
 
 module.exports = router;

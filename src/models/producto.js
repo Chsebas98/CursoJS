@@ -6,10 +6,6 @@ const pdSchema = new Schema({
         required: [true, 'Nombre requerido'],
         unique: true
     },
-    estado: {
-        type: Boolean,
-        default: true
-    },
     usuario: {
         type: SchemaTypes.ObjectId,
         ref: 'User',
@@ -21,9 +17,9 @@ const pdSchema = new Schema({
         default: 0
     },
     categoria: {
-        type: SchemaTypes.ObjectId,
+        type: SchemaTypes.String,
         required: [true, 'Categoria requerida'],
-        ref: 'Categoria'
+        ref: 'Cat'
     },
     description: {
         type: String,
